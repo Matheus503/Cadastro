@@ -11,7 +11,7 @@ FORM ZF_CADASTRO .
   DATA: LV_ANSWER.
 
   CLEAR: LV_ANSWER.
-  CALL FUNCTION 'POPUP_TO_CONFIRM'
+  CALL FUNCTION 'POPUP_TO_CONFIRM' " Funcao de confirmacao de cadastro
     EXPORTING
       TITLEBAR              = 'Confirmação'
       TEXT_QUESTION         = 'Deseja realmente salvar as informações?'
@@ -31,14 +31,14 @@ FORM ZF_CADASTRO .
 
   IF NOT ZTREINAMENTO_09 IS INITIAL.
 
-    MODIFY ZTREINAMENTO_09 FROM ZTREINAMENTO_09.
+    MODIFY ZTREINAMENTO_09 FROM ZTREINAMENTO_09. "Modifica tabela conforme o formulario preenchido.
     IF SY-SUBRC IS INITIAL.
 
       COMMIT WORK AND WAIT."comando para atualizar a tabelha garantindo que tenha a inf na sequencia
       MESSAGE 'Dados salvos com sucesso!' TYPE 'I' DISPLAY LIKE 'S'.
 
       CLEAR: ZTREINAMENTO_09.
-      CALL SCREEN 9000.
+      CALL SCREEN 9000. " Volta pra tela inicial
 
     ENDIF.
   ENDIF.
